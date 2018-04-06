@@ -1,8 +1,10 @@
 package pl.pt.put.poznan.webscraper;
 
 import java.io.BufferedWriter;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -17,8 +19,8 @@ public class Crawler {
     
         driver.get("https://bitbay.net/pl/kurs-walut");
         String source = driver.getPageSource();
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("source.html"))) {
-            writer.write(source);
+        try (Writer out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("source.html"), "UTF-8"))) {
+            out.write(source);
         }
         List<WebElement> elements;
         elements = driver.findElements(By.xpath("//table[@class='table currency-table__table']/tbody/tr"));
