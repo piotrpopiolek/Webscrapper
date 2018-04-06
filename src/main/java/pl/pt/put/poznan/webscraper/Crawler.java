@@ -1,4 +1,4 @@
-package pl.pt.put.poznan.webscrapper;
+package pl.pt.put.poznan.webscraper;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
