@@ -1,3 +1,0 @@
-currenciesdb.cat8w0eapj1d.eu-central-1.rds.amazonaws.com
-WebScrapper
-iusdn51kcns
