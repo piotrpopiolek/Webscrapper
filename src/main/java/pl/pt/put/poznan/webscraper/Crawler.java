@@ -13,7 +13,7 @@ public class Crawler {
         
         for (File e : listOfClasses) {
             String name = e.getName();
-            if (!name.equals("Crawler.java")) {
+            if (!name.equalsIgnoreCase(Crawler.class.getName())) {
                 Class<?> c = Class.forName(packageName + "." + name.substring(0, name.length() - 5));
                 c.getConstructor().newInstance();
             }
