@@ -9,9 +9,9 @@ public class Crawler {
     public static void main(String args[]) throws Exception {
         String packageName = Crawler.class.getPackage().getName();
         File dir = new File("src/main/java/" + packageName.replace(".", "/"));
-        File[] classesArray = dir.listFiles();
+        File[] listOfClasses = dir.listFiles();
         
-        for (File e : classesArray) {
+        for (File e : listOfClasses) {
             String name = e.getName();
             if (!name.equals("Crawler.java")) {
                 Class<?> c = Class.forName(packageName + "." + name.substring(0, name.length() - 5));
