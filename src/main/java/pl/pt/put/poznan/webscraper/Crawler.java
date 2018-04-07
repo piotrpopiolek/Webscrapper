@@ -6,16 +6,16 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
+import com.machinepublishers.jbrowserdriver.JBrowserDriver;
 
 public class Crawler {
     public static void main(String args[]) throws IOException {
-        FirefoxOptions options = new FirefoxOptions();
-        WebDriver driver = new FirefoxDriver(options);
+        WebDriver driver = new JBrowserDriver();
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     
         driver.get("https://bitbay.net/pl/kurs-walut");
         String source = driver.getPageSource();
