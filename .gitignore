@@ -26,4 +26,15 @@ nbactions.xml
 
 source.html
 
+# Intellij
+.idea/
+*.iml
+*.iws
+
+# Database
+src/main/resources/META-INF/
+
+# Driver
+*.exe
+
 # End of https://www.gitignore.io/api/maven,netbeans
