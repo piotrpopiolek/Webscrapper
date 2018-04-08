@@ -12,6 +12,8 @@ public class Bitbay {
     public Bitbay(WebDriver driver) throws Exception {
         List<WebElement> elements;
 
+        System.out.println(driver.getTitle());
+        
         driver.get("https://bitbay.net/pl/kurs-walut");
         elements = driver.findElements(By.xpath("//table[@class='table currency-table__table']/tbody/tr"));
 
@@ -26,14 +28,13 @@ public class Bitbay {
                 System.out.println(splited[5]);
                 System.out.println(splited[6]);
                 System.out.println(splited[7]);
-                CurrencyValue currencyvalue = new CurrencyValue(splited[1]);
-                currencyvalue.setPriceInDollars(Double.parseDouble(splited[2]));
-                currencyvalue.setBid(Double.parseDouble(splited[4]));
-                currencyvalue.setAsk(Double.parseDouble(splited[5]));
-                currencyvalue.setVolume(Double.parseDouble(splited[6]));
-                CurrencyManagement management = CurrencyManagement.getInstance();
-                management.addEntity(currencyvalue);
-
+//                CurrencyValue currencyvalue = new CurrencyValue(splited[1]);
+//                currencyvalue.setPriceInDollars(Double.parseDouble(splited[2]));
+//                currencyvalue.setBid(Double.parseDouble(splited[4]));
+//                currencyvalue.setAsk(Double.parseDouble(splited[5]));
+//                currencyvalue.setVolume(Double.parseDouble(splited[6]));
+//                CurrencyManagement management = CurrencyManagement.getInstance();
+//                management.addCurrency("BTC", "Bitcoin", "https://s2.coinmarketcap.com/static/img/coins/16x16/1.png");
             });
         } else {
             driver.quit();
