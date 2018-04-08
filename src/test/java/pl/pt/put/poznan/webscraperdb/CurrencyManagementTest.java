@@ -1,4 +1,4 @@
-package pl.pt.put.poznan;
+package pl.pt.put.poznan.webscraperdb;
 
 import org.junit.Test;
 import pl.pt.put.poznan.webscraper.beans.CurrencyValue;
