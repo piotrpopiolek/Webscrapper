@@ -1,37 +1,28 @@
 package pl.pt.put.poznan.webscraper;
 
-import java.io.BufferedWriter;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
-import java.util.List;
-import org.openqa.selenium.By;
+import java.io.File;
+import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
+import com.machinepublishers.jbrowserdriver.JBrowserDriver;
 
 public class Crawler {
-    public static void main(String args[]) throws IOException {
-        FirefoxOptions options = new FirefoxOptions();
-        WebDriver driver = new FirefoxDriver(options);
+    public static void main(String args[]) throws Exception {
+        String packageName = Crawler.class.getPackage().getName();
+        File dir = new File("src/main/java/" + packageName.replace(".", "/"));
+        File[] listOfClasses = dir.listFiles();
+        
+        for (File e : listOfClasses) {
+            String name = e.getName();
+            if (!name.equalsIgnoreCase(Crawler.class.getName())) {
+                Class<?> c = Class.forName(packageName + "." + name.replace(".java", ""));
+                c.getConstructor().newInstance();
+            }
+        }
+    }
     
-        driver.get("https://bitbay.net/pl/kurs-walut");
-        String source = driver.getPageSource();
-        try (Writer out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("source.html"), "UTF-8"))) {
-            out.write(source);
-        }
-        List<WebElement> elements;
-        elements = driver.findElements(By.xpath("//table[@class='table currency-table__table']/tbody/tr"));
-        if (!elements.isEmpty()) {
-            elements.stream().forEach((e) -> {
-                System.out.println(e.getText() + "  ");
-            });
-        } else {
-            driver.quit();
-            throw new IOException("Currencies not found!");
-        }
-        driver.quit();
+    public static WebDriver config() {
+        WebDriver driver = new JBrowserDriver();
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        return driver;
     }
 }
