@@ -1,6 +1,7 @@
 package pl.pt.put.poznan.webscraperdb;
 
 import pl.pt.put.poznan.webscraperdb.beans.Currency;
+import pl.pt.put.poznan.webscraperdb.beans.CurrencyValue;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -10,7 +11,6 @@ import java.util.List;
 public class CurrencyManagement {
     private EntityManagerFactory factory;
     private EntityManager entityManager;
-
 
 
     private static CurrencyManagement ourInstance = new CurrencyManagement();
@@ -23,7 +23,23 @@ public class CurrencyManagement {
         factory = Persistence.createEntityManagerFactory("currenciesdb");
     }
 
-    public void addEntity(Object entity) {
+    public void addCurrency(Currency currency) {
+        addEntity(currency);
+    }
+
+    public void addCurrency(String symbol, String name, String urlToLogo) {
+        Currency currency = new Currency();
+        currency.setSymbol(symbol);
+        currency.setName(name);
+        currency.setLogo(ImageConventer.imageToBytes(urlToLogo));
+        addEntity(currency);
+    }
+
+    public void addCurrencyValue(CurrencyValue currencyValue) {
+        addEntity(currencyValue);
+    }
+
+    private void addEntity(Object entity) {
         synchronized (CurrencyManagement.class) {
             openTransaction();
             entityManager.persist(entity);

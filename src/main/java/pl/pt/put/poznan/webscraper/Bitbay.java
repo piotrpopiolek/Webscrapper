@@ -33,8 +33,7 @@ public class Bitbay {
                 currencyvalue.setVolume(Double.parseDouble(splited[6]));
                 CurrencyManagement management = CurrencyManagement.getInstance();
                 management.addEntity(currencyvalue);
-                
-                
+
             });
         } else {
             driver.quit();
