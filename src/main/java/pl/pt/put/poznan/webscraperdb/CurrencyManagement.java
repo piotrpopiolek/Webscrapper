@@ -1,6 +1,6 @@
 package pl.pt.put.poznan.webscraperdb;
 
-import pl.pt.put.poznan.webscraper.beans.Currency;
+import pl.pt.put.poznan.webscraperdb.beans.Currency;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -10,6 +10,8 @@ import java.util.List;
 public class CurrencyManagement {
     private EntityManagerFactory factory;
     private EntityManager entityManager;
+
+
 
     private static CurrencyManagement ourInstance = new CurrencyManagement();
 

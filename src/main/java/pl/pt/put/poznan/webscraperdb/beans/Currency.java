@@ -1,4 +1,4 @@
-package pl.pt.put.poznan.webscraper.beans;
+package pl.pt.put.poznan.webscraperdb.beans;
 
 import javax.persistence.*;
 import java.util.Set;

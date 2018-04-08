@@ -1,4 +1,6 @@
-package pl.pt.put.poznan.webscraper.beans;
+package pl.pt.put.poznan.webscraperdb.beans;
+
+import pl.pt.put.poznan.webscraperdb.CurrencyManagement;
 
 import javax.persistence.*;
 import java.math.BigInteger;
@@ -18,6 +20,14 @@ public class CurrencyValue {
     private double marketCapCurrency;
     private double marketCapExchange;
     private Date date;
+
+    public CurrencyValue() {
+    }
+
+    public CurrencyValue(String symbol) {
+        Currency myCurrency = CurrencyManagement.getInstance().getEntityByPrimaryKey(Currency.class, symbol);
+        setCurrency(myCurrency);
+    }
 
     @Column
     @Id
@@ -112,7 +122,7 @@ public class CurrencyValue {
         this.marketCapExchange = marketCapExchange;
     }
 
-    @Column(insertable=false)
+    @Column(insertable = false)
     public Date getDate() {
         return date;
     }

@@ -1,10 +1,9 @@
 package pl.pt.put.poznan.webscraperdb;
 
 import org.junit.Test;
-import pl.pt.put.poznan.webscraper.beans.CurrencyValue;
+import pl.pt.put.poznan.webscraperdb.beans.*;
 
 import java.util.List;
-import pl.pt.put.poznan.webscraperdb.CurrencyManagement;
 
 public class CurrencyManagementTest {
     CurrencyManagement currencyManagement = CurrencyManagement.getInstance();
