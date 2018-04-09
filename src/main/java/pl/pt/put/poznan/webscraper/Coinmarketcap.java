@@ -30,7 +30,7 @@ public class Coinmarketcap {
         
         driver.get("https://coinmarketcap.com/all/views/all/");
 
-        elementsSymbol = driver.findElements(By.className("col-symbol"));
+        elementsSymbol = driver.findElements(By.className("text-left col-symbol"));
         elementsName = driver.findElements(By.className("currency-name-container"));
 
         if (!elementsSymbol.isEmpty()) {
@@ -71,9 +71,9 @@ public class Coinmarketcap {
 
         int ID = 0;
         for (String s : links) {
-            System.out.println(Integer.toString(ID)+" "+symbols.get(ID-1)+" "+names.get(ID)+" "+links.get(ID));
+            System.out.println(Integer.toString(ID)+" "+symbols.get(ID)+" "+names.get(ID)+" "+links.get(ID));
             CurrencyManagement management = CurrencyManagement.getInstance();
-            management.addCurrency(symbols.get(ID-1), names.get(ID), links.get(ID));
+            management.addCurrency(symbols.get(ID), names.get(ID), links.get(ID));
             ID=ID+1;
         }
     }
