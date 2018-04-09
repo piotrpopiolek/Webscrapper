@@ -15,7 +15,7 @@ public class Bitbay {
         List<WebElement> elements;
 
         System.out.println(driver.getTitle());
-        
+
         driver.get("https://bitbay.net/pl/kurs-walut");
         elements = driver.findElements(By.xpath("//table[@class='table currency-table__table']/tbody/tr"));
 
@@ -41,11 +41,11 @@ public class Bitbay {
                 }
                 else if(splited[1].equals("EUR"))
                 {
-                
+
                 }
                 else if(splited[1].equals("USD"))
                 {
-                
+
                 }
                 else
                 {
@@ -56,7 +56,7 @@ public class Bitbay {
                 currencyvalue.setVolume(Double.parseDouble(splited[6]));
                 CurrencyManagement management = CurrencyManagement.getInstance();
                 management.addCurrencyValue(currencyvalue);
-                }       
+                }
             });
         } else {
             driver.quit();

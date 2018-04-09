@@ -21,6 +21,7 @@ public class CurrencyManagement {
 
     private CurrencyManagement() {
         factory = Persistence.createEntityManagerFactory("currenciesdb");
+        entityManager = factory.createEntityManager();
     }
 
     public void addCurrency(Currency currency) {
@@ -40,37 +41,37 @@ public class CurrencyManagement {
     }
 
     private void addEntity(Object entity) {
+        if (checkIfAlreadyExists(entity)) {
+            return;
+        }
         synchronized (CurrencyManagement.class) {
             openTransaction();
-            if (entity.getClass() == Currency.class) {
-                if(getEntityByPrimaryKey(Currency.class,((Currency) entity).getSymbol())==null){
-                    closeTransaction();
-                    return;
-                }
-            }
             entityManager.persist(entity);
-            commitAndCloseTransaction();
+            commitTransaction();
         }
     }
 
+    private boolean checkIfAlreadyExists(Object entity) {
+        if (entity.getClass() == Currency.class) {
+            if (getEntityByPrimaryKey(Currency.class, ((Currency) entity).getSymbol()) != null) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void openTransaction() {
-        entityManager = factory.createEntityManager();
         entityManager.getTransaction().begin();
     }
 
-    private void commitAndCloseTransaction() {
+    private void commitTransaction() {
         entityManager.getTransaction().commit();
-        closeTransaction();
-    }
-
-    private void closeTransaction() {
-        entityManager.close();
     }
 
     public <T> T getEntityByPrimaryKey(Class<T> aClass, String primaryKeyValue) {
         openTransaction();
         T entity = entityManager.find(aClass, primaryKeyValue);
-        closeTransaction();
+        commitTransaction();
         return entity;
     }
 
@@ -87,7 +88,7 @@ public class CurrencyManagement {
             name = "CurrencyValue";
         }
         List<T> entities = entityManager.createQuery("SELECT n FROM " + name + " n " + conditionInSql).getResultList();
-        closeTransaction();
+        commitTransaction();
         return entities;
     }
 }

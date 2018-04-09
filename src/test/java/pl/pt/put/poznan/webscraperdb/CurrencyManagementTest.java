@@ -14,5 +14,9 @@ public class CurrencyManagementTest {
         for (CurrencyValue currencies : currency) {
             System.out.println(currencies.getPriceInDollars());
         }
+        List<Currency> currencyv = currencyManagement.getEntities(Currency.class);
+        for (Currency currencies : currencyv) {
+            System.out.println(currencies.getName());
+        }
     }
 }
