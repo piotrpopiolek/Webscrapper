@@ -71,9 +71,9 @@ public class Coinmarketcap {
 
         int ID = 0;
         for (String s : links) {
-            System.out.println(Integer.toString(ID)+" "+names.get(ID)+" "+symbols.get(ID)+" "+links.get(ID));
+            System.out.println(Integer.toString(ID)+" "+symbols.get(ID-1)+" "+names.get(ID)+" "+links.get(ID));
             CurrencyManagement management = CurrencyManagement.getInstance();
-            management.addCurrency(symbols.get(ID), names.get(ID), links.get(ID));
+            management.addCurrency(symbols.get(ID-1), names.get(ID), links.get(ID));
             ID=ID+1;
         }
     }
