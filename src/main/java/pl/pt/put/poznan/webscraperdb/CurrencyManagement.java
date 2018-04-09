@@ -42,6 +42,12 @@ public class CurrencyManagement {
     private void addEntity(Object entity) {
         synchronized (CurrencyManagement.class) {
             openTransaction();
+            if (entity.getClass() == Currency.class) {
+                if(getEntityByPrimaryKey(Currency.class,((Currency) entity).getSymbol())==null){
+                    closeTransaction();
+                    return;
+                }
+            }
             entityManager.persist(entity);
             commitAndCloseTransaction();
         }
