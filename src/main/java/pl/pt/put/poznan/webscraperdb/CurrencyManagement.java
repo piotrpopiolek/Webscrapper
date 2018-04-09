@@ -10,7 +10,7 @@ import java.util.List;
 
 public class CurrencyManagement {
     private EntityManagerFactory factory;
-    private EntityManager entityManager;
+    private ThreadLocal<EntityManager> threadLocal;
 
 
     private static CurrencyManagement ourInstance = new CurrencyManagement();
@@ -21,7 +21,16 @@ public class CurrencyManagement {
 
     private CurrencyManagement() {
         factory = Persistence.createEntityManagerFactory("currenciesdb");
-        entityManager = factory.createEntityManager();
+        threadLocal = new ThreadLocal<EntityManager>();
+    }
+
+    private EntityManager getEntityManager() {
+        EntityManager entityManager = threadLocal.get();
+        if (entityManager == null) {
+            threadLocal.set(factory.createEntityManager());
+            entityManager = threadLocal.get();
+        }
+        return entityManager;
     }
 
     public void addCurrency(Currency currency) {
@@ -45,9 +54,14 @@ public class CurrencyManagement {
             return;
         }
         synchronized (CurrencyManagement.class) {
-            openTransaction();
-            entityManager.persist(entity);
-            commitTransaction();
+            try {
+                openTransaction();
+                getEntityManager().persist(entity);
+                commitTransaction();
+            } catch (Exception e) {
+                getEntityManager().getTransaction().rollback();
+                e.printStackTrace();
+            }
         }
     }
 
@@ -61,16 +75,21 @@ public class CurrencyManagement {
     }
 
     private void openTransaction() {
-        entityManager.getTransaction().begin();
+        getEntityManager().getTransaction().begin();
     }
 
     private void commitTransaction() {
-        entityManager.getTransaction().commit();
+        try {
+            getEntityManager().getTransaction().commit();
+        } catch (Exception e) {
+            getEntityManager().getTransaction().rollback();
+            e.printStackTrace();
+        }
     }
 
     public <T> T getEntityByPrimaryKey(Class<T> aClass, String primaryKeyValue) {
         openTransaction();
-        T entity = entityManager.find(aClass, primaryKeyValue);
+        T entity = getEntityManager().find(aClass, primaryKeyValue);
         commitTransaction();
         return entity;
     }
@@ -87,7 +106,7 @@ public class CurrencyManagement {
         } else {
             name = "CurrencyValue";
         }
-        List<T> entities = entityManager.createQuery("SELECT n FROM " + name + " n " + conditionInSql).getResultList();
+        List<T> entities = getEntityManager().createQuery("SELECT n FROM " + name + " n " + conditionInSql).getResultList();
         commitTransaction();
         return entities;
     }
