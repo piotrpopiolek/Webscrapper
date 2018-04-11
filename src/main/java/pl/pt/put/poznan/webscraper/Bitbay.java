@@ -29,6 +29,9 @@ public class Bitbay {
                 System.out.println(splited[5]);
                 System.out.println(splited[6]);
                 System.out.println(splited[7]);
+                System.out.println(splited[8]);
+                System.out.println();
+                
                 if(splited[1].equals("PLN"))
                 {
                 CurrencyValue currencyvalue = new CurrencyValue("BTC");
@@ -36,16 +39,40 @@ public class Bitbay {
                 currencyvalue.setBid(Double.parseDouble(splited[4]));
                 currencyvalue.setAsk(Double.parseDouble(splited[5]));
                 currencyvalue.setVolume(Double.parseDouble(splited[6]));
+                //currencyvalue.setMarketCapName("Bitbay");
                 CurrencyManagement management = CurrencyManagement.getInstance();
                 management.addCurrencyValue(currencyvalue);
                 }
                 else if(splited[1].equals("EUR"))
                 {
-
+                    
                 }
                 else if(splited[1].equals("USD"))
                 {
 
+                }
+                //Do poprawy
+                else if(splited[8].equals("BCC"))
+                {
+                CurrencyValue currencyvalue = new CurrencyValue("BCC");
+                currencyvalue.setPriceInBitcoin(Double.parseDouble(splited[3]));
+                currencyvalue.setBid(Double.parseDouble(splited[5]));
+                currencyvalue.setAsk(Double.parseDouble(splited[6]));
+                currencyvalue.setVolume(Double.parseDouble(splited[7]));
+                //currencyvalue.setMarketCapName("Bitbay");
+                CurrencyManagement management = CurrencyManagement.getInstance();
+                management.addCurrencyValue(currencyvalue);
+                }
+                else if(splited[8].equals("BTG"))
+                {
+                CurrencyValue currencyvalue = new CurrencyValue("BTG");
+                currencyvalue.setPriceInBitcoin(Double.parseDouble(splited[3]));
+                currencyvalue.setBid(Double.parseDouble(splited[5]));
+                currencyvalue.setAsk(Double.parseDouble(splited[6]));
+                currencyvalue.setVolume(Double.parseDouble(splited[7]));
+                //currencyvalue.setMarketCapName("Bitbay");
+                CurrencyManagement management = CurrencyManagement.getInstance();
+                management.addCurrencyValue(currencyvalue);
                 }
                 else
                 {
@@ -54,6 +81,7 @@ public class Bitbay {
                 currencyvalue.setBid(Double.parseDouble(splited[4]));
                 currencyvalue.setAsk(Double.parseDouble(splited[5]));
                 currencyvalue.setVolume(Double.parseDouble(splited[6]));
+                //currencyvalue.setMarketCapName("Bitbay");
                 CurrencyManagement management = CurrencyManagement.getInstance();
                 management.addCurrencyValue(currencyvalue);
                 }
