@@ -1,9 +1,11 @@
+package pl.pt.put.poznan.webscraper;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pl.pt.put.poznan.webscraper;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +30,7 @@ public class Binance {
 
         driver.get("https://www.binance.com/");
         WebElement table = driver.findElement(By.id("products"));
-
+        double i=0.0001;
         if (!table.equals(null)) {
             int ignorefirst = 11;
             int columnInRow = 8;
@@ -40,14 +42,14 @@ public class Binance {
                 System.out.println(StringUtils.substringAfter(allTable[j + 3], "$"));
                 System.out.println(allTable[j + 5]);
                 System.out.println(allTable[j + 6]);
-                System.out.println(allTable[j + 7]);
+                System.out.println(allTable[j + 7].replace(",",""));
                 System.out.println();
                 CurrencyValue currencyvalue = new CurrencyValue(StringUtils.substringBefore(allTable[j], "/BTC"));
                 currencyvalue.setPriceInBitcoin(Double.parseDouble(allTable[j + 1]));
                 currencyvalue.setPriceInDollars(Double.parseDouble(StringUtils.substringAfter(allTable[j + 3], "$")));
                 currencyvalue.setBid(Double.parseDouble(allTable[j + 5]));
                 currencyvalue.setAsk(Double.parseDouble(allTable[j + 6]));
-                //currencyvalue.setVolume(Double.parseDouble(allTable[j + 7]));
+                currencyvalue.setVolume(Double.parseDouble(allTable[j + 7].replace(",","")));
                 //currencyvalue.setMarketCapName("Binance");
                 CurrencyManagement management = CurrencyManagement.getInstance();
                 management.addCurrencyValue(currencyvalue);
