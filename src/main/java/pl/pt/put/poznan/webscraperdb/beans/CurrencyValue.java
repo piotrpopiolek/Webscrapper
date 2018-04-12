@@ -20,6 +20,7 @@ public class CurrencyValue {
     private double marketCapCurrency;
     private double marketCapExchange;
     private Date date;
+    private String marketName;
 
     public CurrencyValue() {
     }
@@ -129,5 +130,14 @@ public class CurrencyValue {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    @Column
+    public String getMarketName() {
+        return marketName;
+    }
+
+    public void setMarketName(String marketName) {
+        this.marketName = marketName;
     }
 }
