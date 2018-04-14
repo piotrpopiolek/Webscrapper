@@ -42,6 +42,7 @@ public class Binance {
                     System.out.println(allTable[j + 5]);
                     System.out.println(allTable[j + 6]);
                     System.out.println(allTable[j + 7].replace(",", ""));
+                    System.out.println("Binance");
                 } else {
                     System.out.println(StringUtils.substringBefore(allTable[j], "/BTC"));
                     System.out.println(allTable[j + 1]);
@@ -49,6 +50,7 @@ public class Binance {
                     System.out.println(allTable[j + 5]);
                     System.out.println(allTable[j + 6]);
                     System.out.println(allTable[j + 7].replace(",", ""));
+                    System.out.println("Binance");
                     System.out.println();
                     CurrencyValue currencyvalue = new CurrencyValue(StringUtils.substringBefore(allTable[j], "/BTC"));
                     currencyvalue.setPriceInBitcoin(Double.parseDouble(allTable[j + 1]));
@@ -56,7 +58,7 @@ public class Binance {
                     currencyvalue.setBid(Double.parseDouble(allTable[j + 5]));
                     currencyvalue.setAsk(Double.parseDouble(allTable[j + 6]));
                     currencyvalue.setVolume(Double.parseDouble(allTable[j + 7].replace(",", "")));
-                    //currencyvalue.setMarketCapName("Binance");
+                    currencyvalue.setMarketName("Binance");
                     CurrencyManagement management = CurrencyManagement.getInstance();
                     management.addCurrencyValue(currencyvalue);
                 }
