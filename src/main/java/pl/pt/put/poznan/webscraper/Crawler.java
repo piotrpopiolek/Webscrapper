@@ -28,7 +28,7 @@ public class Crawler {
                             }
                         }
             
-                        Thread.sleep(30000);
+                        Thread.sleep(1000);
                     }
                 } catch (ClassNotFoundException | IllegalAccessException | IllegalArgumentException | InstantiationException | InterruptedException | NoSuchMethodException | SecurityException | InvocationTargetException e) {
                     System.out.println(e.getMessage());
