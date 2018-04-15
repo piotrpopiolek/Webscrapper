@@ -42,22 +42,55 @@ public class Kucoin {
             int columnInRow = 7;
             String[] allTable = table.getText().split("\\s+");
             for (int j = ignorefirst; j < allTable.length; j = j + columnInRow) {
-
-                System.out.println(StringUtils.substringBefore(allTable[j], "/BTC"));
-                System.out.println(allTable[j + 1]);
-                System.out.println(StringUtils.substringAfter(allTable[j + 2].replace(",",""), "$"));
-                System.out.println(allTable[j + 4].replace(",", ""));
-                System.out.println(allTable[j + 5].replace(",", ""));
-                System.out.println("Kucoin");
-                System.out.println();
-                CurrencyValue currencyvalue = new CurrencyValue(StringUtils.substringBefore(allTable[j], "/BTC"));
-                currencyvalue.setPriceInBitcoin(Double.parseDouble(allTable[j + 1]));
-                currencyvalue.setPriceInDollars(Double.parseDouble(StringUtils.substringAfter(allTable[j + 2].replace(",",""), "$")));
-                currencyvalue.setMarketCapCurrency(Double.parseDouble((allTable[j + 4].replace(",", ""))));
-                currencyvalue.setVolume(Double.parseDouble(allTable[j + 5].replace(",", "")));
-                currencyvalue.setMarketName("Kucoin");
-                CurrencyManagement management = CurrencyManagement.getInstance();
-                management.addCurrencyValue(currencyvalue);
+                if (allTable[j].indexOf("/ETH") != -1) {
+                    System.out.println(StringUtils.substringBefore(allTable[j], "/ETH"));
+                    System.out.println(allTable[j + 1]);
+                    System.out.println(StringUtils.substringAfter(allTable[j + 2].replace(",", ""), "$"));
+                    System.out.println(allTable[j + 4].replace(",", ""));
+                    System.out.println(allTable[j + 5].replace(",", ""));
+                    System.out.println("Kucoin");
+                    System.out.println();
+                } else if (allTable[j].indexOf("/NEO") != -1) {
+                    System.out.println(StringUtils.substringBefore(allTable[j], "/NEO"));
+                    System.out.println(allTable[j + 1]);
+                    System.out.println(StringUtils.substringAfter(allTable[j + 2].replace(",", ""), "$"));
+                    System.out.println(allTable[j + 4].replace(",", ""));
+                    System.out.println(allTable[j + 5].replace(",", ""));
+                    System.out.println("Kucoin");
+                    System.out.println();
+                } else if (allTable[j].indexOf("/USDT") != -1) {
+                    System.out.println(StringUtils.substringBefore(allTable[j], "/USDT"));
+                    System.out.println(allTable[j + 1]);
+                    System.out.println(StringUtils.substringAfter(allTable[j + 2].replace(",", ""), "$"));
+                    System.out.println(allTable[j + 4].replace(",", ""));
+                    System.out.println(allTable[j + 5].replace(",", ""));
+                    System.out.println("Kucoin");
+                    System.out.println();
+                } else if (allTable[j].indexOf("/KCS") != -1) {
+                    System.out.println(StringUtils.substringBefore(allTable[j], "/KCS"));
+                    System.out.println(allTable[j + 1]);
+                    System.out.println(StringUtils.substringAfter(allTable[j + 2].replace(",", ""), "$"));
+                    System.out.println(allTable[j + 4].replace(",", ""));
+                    System.out.println(allTable[j + 5].replace(",", ""));
+                    System.out.println("Kucoin");
+                    System.out.println();
+                } else {
+                    System.out.println(StringUtils.substringBefore(allTable[j], "/BTC"));
+                    System.out.println(allTable[j + 1]);
+                    System.out.println(StringUtils.substringAfter(allTable[j + 2].replace(",", ""), "$"));
+                    System.out.println(allTable[j + 4].replace(",", ""));
+                    System.out.println(allTable[j + 5].replace(",", ""));
+                    System.out.println("Kucoin");
+                    System.out.println();
+                    CurrencyValue currencyvalue = new CurrencyValue(StringUtils.substringBefore(allTable[j], "/BTC"));
+                    currencyvalue.setPriceInBitcoin(Double.parseDouble(allTable[j + 1]));
+                    currencyvalue.setPriceInDollars(Double.parseDouble(StringUtils.substringAfter(allTable[j + 2].replace(",", ""), "$")));
+                    currencyvalue.setMarketCapCurrency(Double.parseDouble((allTable[j + 4].replace(",", ""))));
+                    currencyvalue.setVolume(Double.parseDouble(allTable[j + 5].replace(",", "")));
+                    currencyvalue.setMarketName("Kucoin");
+                    CurrencyManagement management = CurrencyManagement.getInstance();
+                    management.addCurrencyValue(currencyvalue);
+                }
             }
         } else {
             driver.quit();

@@ -11,7 +11,7 @@ public class Crawler {
     
     public static void main(String args[]) throws Exception {
         WebDriver driver = new FirefoxDriver();
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(120, TimeUnit.SECONDS);
         String packageName = Crawler.class.getPackage().getName();
         File dir = new File("src/main/java/" + packageName.replace(".", "/"));
         File[] listOfClasses = dir.listFiles();
