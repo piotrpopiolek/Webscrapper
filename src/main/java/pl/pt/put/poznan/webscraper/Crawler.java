@@ -5,11 +5,12 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.WebDriver;
 import com.machinepublishers.jbrowserdriver.JBrowserDriver;
 import java.lang.reflect.InvocationTargetException;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class Crawler {
     
     public static void main(String args[]) throws Exception {
-        WebDriver driver = new JBrowserDriver();
+        WebDriver driver = new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         String packageName = Crawler.class.getPackage().getName();
         File dir = new File("src/main/java/" + packageName.replace(".", "/"));
@@ -27,7 +28,6 @@ public class Crawler {
                                 c.getConstructor(WebDriver.class).newInstance(driver);
                             }
                         }
-            
                         Thread.sleep(1000);
                     }
                 } catch (ClassNotFoundException | IllegalAccessException | IllegalArgumentException | InstantiationException | InterruptedException | NoSuchMethodException | SecurityException | InvocationTargetException e) {
