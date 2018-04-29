@@ -1,4 +1,6 @@
-package pl.pt.put.poznan.webscraper;
+
+
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
