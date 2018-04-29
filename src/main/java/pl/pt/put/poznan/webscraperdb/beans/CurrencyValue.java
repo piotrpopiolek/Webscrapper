@@ -7,7 +7,7 @@ import java.math.BigInteger;
 import java.util.Date;
 
 @Entity
-@Table(name = "\"Currency Values\"", schema = "dbo", catalog = "Currencies")
+@Table(name = "CurrencyValues", schema = "currencies")
 public class CurrencyValue {
     private BigInteger valueId;
     private Currency currency;

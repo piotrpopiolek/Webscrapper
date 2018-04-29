@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "Currencies", schema = "dbo", catalog = "Currencies")
+@Table(name = "Currencies", schema = "currencies")
 public class Currency {
     private String symbol;
     private String name;
