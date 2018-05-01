@@ -1,25 +1,11 @@
-
-
-
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
 import java.util.ArrayList;
 import java.util.List;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import pl.pt.put.poznan.webscraperdb.CurrencyManagement;
 
-/**
- *
- * @author Lenovo
- */
 public class Coinmarketcap {
 
     public Coinmarketcap(WebDriver driver) throws Exception {
@@ -58,7 +44,10 @@ public class Coinmarketcap {
         System.out.println(driver.getTitle());
 
         do {
-            elementsLogo = driver.findElements(By.className("currency-logo-sprite"));
+            for(int i=0;i<6200;i++) {
+                ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,1)", "");
+            }
+            elementsLogo = driver.findElements(By.xpath("//img[contains(@class,'logo-sprite')]"));
 
             if (!elementsLogo.isEmpty()) {
                 elementsLogo.stream().forEach((e) -> {
