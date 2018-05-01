@@ -14,9 +14,9 @@ public class Coinmarketcap {
         List<WebElement> elementsLogo;
         List<WebElement> elementsSymbol;
         List<WebElement> elementsName;
-        List<String> links = new ArrayList<String>();
-        List<String> names = new ArrayList<String>();
-        List<String> symbols = new ArrayList<String>();
+        List<String> links = new ArrayList<>();
+        List<String> names = new ArrayList<>();
+        List<String> symbols = new ArrayList<>();
         
         driver.get("https://coinmarketcap.com/all/views/all/");
 
