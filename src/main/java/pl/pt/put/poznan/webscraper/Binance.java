@@ -16,10 +16,10 @@ public class Binance {
         List<WebElement> rows = driver.findElements(By.xpath("//tr[contains(@ng-click,'changeProduct') and not(contains(@style,'display: none;'))]"));
 
         if (rows.size() > 0) {
-            rows.forEach((e) -> {
+            for (WebElement e : rows) {
                 CurrencyValue cv = new CurrencyValue(e.findElement(By.xpath(".//td[2]")).getText().replace("/BTC", ""));
                 String[] prices = e.findElement(By.xpath(".//td[3]")).getText().split("/");
-                if (prices.length != 2) {
+                if (prices.length == 2) {
                     prices[1] = prices[1].replace("$", "").replace(",", "");
                     cv.setPriceInDollars(Double.parseDouble(prices[1]));
                     cv.setPriceInBitcoin(Double.parseDouble(prices[0]));
@@ -33,7 +33,7 @@ public class Binance {
                     CurrencyManagement management = CurrencyManagement.getInstance();
                     management.addCurrencyValue(cv);
                 }
-            });
+            }
         } else {
             throw new Exception("Binance: Currencies not found!");
         }

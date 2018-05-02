@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.WebDriver;
 import com.machinepublishers.jbrowserdriver.JBrowserDriver;
-import com.machinepublishers.jbrowserdriver.Settings;
 import java.lang.reflect.InvocationTargetException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -12,7 +11,7 @@ import java.util.logging.Logger;
 public class Crawler {
 
     public static void main(String args[]) throws Exception {
-        WebDriver driver = new JBrowserDriver(Settings.builder().headless(false).build());
+        WebDriver driver = new JBrowserDriver();
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         String packageName = Crawler.class.getPackage().getName();
         File dir = new File("src/main/java/" + packageName.replace(".", "/"));
