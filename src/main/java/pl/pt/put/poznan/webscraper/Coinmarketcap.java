@@ -1,3 +1,5 @@
+package pl.pt.put.poznan.webscraper;
+
 import java.util.ArrayList;
 import java.util.List;
 import org.openqa.selenium.By;
@@ -14,15 +16,18 @@ public class Coinmarketcap {
         List<WebElement> elementsLogo;
         List<WebElement> elementsSymbol;
         List<WebElement> elementsName;
+        List<WebElement> elementsMarketCap;
         List<String> links = new ArrayList<>();
         List<String> names = new ArrayList<>();
         List<String> symbols = new ArrayList<>();
+        List<String> marketCap = new ArrayList<>();
         
         driver.get("https://coinmarketcap.com/all/views/all/");
 
         elementsSymbol = driver.findElements(By.className("text-left col-symbol"));
         elementsName = driver.findElements(By.className("no-wrap currency-name"));
         elementsLogo = driver.findElements(By.xpath("//div[contains(@class,'logo-sprite')]"));
+        elementsMarketCap = driver.findElements(By.className("market-cap text-right"));
 
         if (!elementsSymbol.isEmpty()) {
             elementsSymbol.stream().forEach((e) -> {
@@ -46,6 +51,14 @@ public class Coinmarketcap {
             });
         } else {
             throw new Exception("Logos not found!");
+        }
+        
+        if (!elementsMarketCap.isEmpty()) {
+            elementsMarketCap.stream().forEach((e) -> {
+                marketCap.add(e.getAttribute("data-usd"));
+            });
+        } else {
+            throw new Exception("MarketCaps not found!");
         }
 
 //        String url = "https://coinmarketcap.com/";
