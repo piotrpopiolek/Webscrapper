@@ -1,9 +1,8 @@
-package pl.pt.put.poznan.webscraper;
+package pl.pt.put.poznan.currencies;
 
 import java.util.ArrayList;
 import java.util.List;
 import org.openqa.selenium.By;
-//import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import pl.pt.put.poznan.webscraperdb.CurrencyManagement;
@@ -11,8 +10,6 @@ import pl.pt.put.poznan.webscraperdb.CurrencyManagement;
 public class Coinmarketcap {
 
     public Coinmarketcap(WebDriver driver) throws Exception {
-//        boolean stop = true;
-//        int nextPage = 1;
         List<WebElement> elementsLogo;
         List<WebElement> elementsSymbol;
         List<WebElement> elementsName;
@@ -20,7 +17,7 @@ public class Coinmarketcap {
         List<String> links = new ArrayList<>();
         List<String> names = new ArrayList<>();
         List<String> symbols = new ArrayList<>();
-        List<String> marketCap = new ArrayList<>();
+        List<Long> marketCap = new ArrayList<>();
         
         driver.get("https://coinmarketcap.com/all/views/all/");
 
@@ -55,34 +52,11 @@ public class Coinmarketcap {
         
         if (!elementsMarketCap.isEmpty()) {
             elementsMarketCap.stream().forEach((e) -> {
-                marketCap.add(e.getAttribute("data-usd"));
+                marketCap.add(Long.parseLong(e.getAttribute("data-usd").replaceAll(" ", "").replace("$", "")));
             });
         } else {
             throw new Exception("MarketCaps not found!");
         }
-
-//        String url = "https://coinmarketcap.com/";
-//        driver.get(url);
-//        System.out.println(driver.getTitle());
-//
-//        do {
-//            for(int i=0;i<6200;i++) {
-//                ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,1)", "");
-//            }
-//            elementsLogo = driver.findElements(By.xpath("//img[contains(@class,'logo-sprite')]"));
-//
-//            if (!elementsLogo.isEmpty()) {
-//                elementsLogo.stream().forEach((e) -> {
-//                    String position = e.getText();
-//                    links.add(e.getAttribute("src"));
-//                });
-//                nextPage = nextPage + 1;
-//                System.out.println(url + Integer.toString(nextPage));
-//                driver.get(url + Integer.toString(nextPage));
-//            } else {
-//                stop = false;
-//            }
-//        } while (stop);
 
         for (int i = 0; i < links.size(); i++) {
             System.out.println(Integer.toString(i) + " " + symbols.get(i) + " " + names.get(i) + " " + links.get(i));

@@ -1,7 +1,5 @@
 package pl.pt.put.poznan.webscraper;
 
-
-
 import java.util.HashMap;
 import java.util.List;
 import org.openqa.selenium.By;
