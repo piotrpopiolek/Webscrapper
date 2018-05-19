@@ -24,7 +24,7 @@ public class Coinmarketcap {
         elementsSymbol = driver.findElements(By.className("text-left col-symbol"));
         elementsName = driver.findElements(By.className("no-wrap currency-name"));
         elementsLogo = driver.findElements(By.xpath("//div[contains(@class,'logo-sprite')]"));
-        elementsMarketCap = driver.findElements(By.className("market-cap text-right"));
+        elementsMarketCap = driver.findElements(By.xpath("//td[contains(@class,'market-cap')]"));
 
         if (!elementsSymbol.isEmpty()) {
             elementsSymbol.stream().forEach((e) -> {
@@ -52,7 +52,8 @@ public class Coinmarketcap {
         
         if (!elementsMarketCap.isEmpty()) {
             elementsMarketCap.stream().forEach((e) -> {
-                marketCap.add(Long.parseLong(e.getAttribute("data-usd").replaceAll(" ", "").replace("$", "")));
+                System.out.println(e);
+                marketCap.add(Long.parseLong(e.getText().replaceAll(" ", "").replace("$", "").replace("?", "0")));
             });
         } else {
             throw new Exception("MarketCaps not found!");
