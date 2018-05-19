@@ -1,4 +1,4 @@
 #!/bin/bash
-cd ../Webscrapper
+cd home/admin/Webscrapper
 mvn clean install
 mvn exec:java
