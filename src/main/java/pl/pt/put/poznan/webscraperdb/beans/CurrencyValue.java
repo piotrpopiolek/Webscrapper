@@ -17,8 +17,6 @@ public class CurrencyValue {
     private double bid;
     private double ask;
     private double volume;
-    private double marketCapCurrency;
-    private double marketCapExchange;
     private Date date;
     private String marketName;
 
@@ -103,24 +101,6 @@ public class CurrencyValue {
 
     public void setVolume(double volume) {
         this.volume = volume;
-    }
-
-    @Column
-    public double getMarketCapCurrency() {
-        return marketCapCurrency;
-    }
-
-    public void setMarketCapCurrency(double marketCapCurrency) {
-        this.marketCapCurrency = marketCapCurrency;
-    }
-
-    @Column
-    public double getMarketCapExchange() {
-        return marketCapExchange;
-    }
-
-    public void setMarketCapExchange(double marketCapExchange) {
-        this.marketCapExchange = marketCapExchange;
     }
 
     @Column(insertable = false)

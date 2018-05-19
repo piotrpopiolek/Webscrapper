@@ -9,6 +9,7 @@ public class Currency {
     private String symbol;
     private String name;
     private byte[] logo;
+    private double marketCap;
     private Set<CurrencyValue> currencyValues;
 
     @Column
@@ -39,7 +40,16 @@ public class Currency {
         this.logo = logo;
     }
 
-    @OneToMany(mappedBy="currency")
+    @Column
+    private double getMarketCap() {
+        return marketCap;
+    }
+
+    private void setMarketCap(double marketCap) {
+        this.marketCap = marketCap;
+    }
+
+    @OneToMany(mappedBy = "currency")
     public Set<CurrencyValue> getCurrencyValues() {
         return currencyValues;
     }
