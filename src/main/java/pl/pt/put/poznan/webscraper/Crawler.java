@@ -20,7 +20,7 @@ public class Crawler {
         File dir = new File("src/main/java/" + packageName.replace(".", "/"));
         File[] listOfClasses = dir.listFiles();
 
-        WebDriver driver = new JBrowserDriver(Settings.builder().headless(false).userAgent(UserAgent.CHROME).build());
+        WebDriver driver = new JBrowserDriver(Settings.builder().userAgent(UserAgent.CHROME).build());
         new Coinmarketcap(driver);
         driver.quit();
         
@@ -47,7 +47,7 @@ public class Crawler {
     private static Runnable runNewThread(String className) {
         Runnable r = () -> {
             System.out.println("\n" + Thread.currentThread().getName() + "\n");
-            WebDriver driver = new JBrowserDriver(Settings.builder().headless(false).userAgent(UserAgent.CHROME).build());
+            WebDriver driver = new JBrowserDriver(Settings.builder().userAgent(UserAgent.CHROME).build());
             driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
             try {
                 Class<?> c = Class.forName(className);
