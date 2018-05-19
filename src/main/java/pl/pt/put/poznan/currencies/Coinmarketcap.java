@@ -1,7 +1,8 @@
+package pl.pt.put.poznan.currencies;
+
 import java.util.ArrayList;
 import java.util.List;
 import org.openqa.selenium.By;
-//import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import pl.pt.put.poznan.webscraperdb.CurrencyManagement;
@@ -9,20 +10,21 @@ import pl.pt.put.poznan.webscraperdb.CurrencyManagement;
 public class Coinmarketcap {
 
     public Coinmarketcap(WebDriver driver) throws Exception {
-//        boolean stop = true;
-//        int nextPage = 1;
         List<WebElement> elementsLogo;
         List<WebElement> elementsSymbol;
         List<WebElement> elementsName;
+        List<WebElement> elementsMarketCap;
         List<String> links = new ArrayList<>();
         List<String> names = new ArrayList<>();
         List<String> symbols = new ArrayList<>();
+        List<Long> marketCap = new ArrayList<>();
         
         driver.get("https://coinmarketcap.com/all/views/all/");
 
-        elementsSymbol = driver.findElements(By.className("text-left col-symbol"));
-        elementsName = driver.findElements(By.className("no-wrap currency-name"));
+        elementsSymbol = driver.findElements(By.xpath("//td[contains(@class,'col-symbol')]"));
+        elementsName = driver.findElements(By.xpath("//td[contains(@class,'currency-name')]"));
         elementsLogo = driver.findElements(By.xpath("//div[contains(@class,'logo-sprite')]"));
+        elementsMarketCap = driver.findElements(By.xpath("//td[contains(@class,'market-cap')]"));
 
         if (!elementsSymbol.isEmpty()) {
             elementsSymbol.stream().forEach((e) -> {
@@ -47,29 +49,15 @@ public class Coinmarketcap {
         } else {
             throw new Exception("Logos not found!");
         }
-
-//        String url = "https://coinmarketcap.com/";
-//        driver.get(url);
-//        System.out.println(driver.getTitle());
-//
-//        do {
-//            for(int i=0;i<6200;i++) {
-//                ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,1)", "");
-//            }
-//            elementsLogo = driver.findElements(By.xpath("//img[contains(@class,'logo-sprite')]"));
-//
-//            if (!elementsLogo.isEmpty()) {
-//                elementsLogo.stream().forEach((e) -> {
-//                    String position = e.getText();
-//                    links.add(e.getAttribute("src"));
-//                });
-//                nextPage = nextPage + 1;
-//                System.out.println(url + Integer.toString(nextPage));
-//                driver.get(url + Integer.toString(nextPage));
-//            } else {
-//                stop = false;
-//            }
-//        } while (stop);
+        
+        if (!elementsMarketCap.isEmpty()) {
+            elementsMarketCap.stream().forEach((e) -> {
+                System.out.println(e);
+                marketCap.add(Long.parseLong(e.getText().replaceAll(" ", "").replace("$", "").replace("?", "0")));
+            });
+        } else {
+            throw new Exception("MarketCaps not found!");
+        }
 
         for (int i = 0; i < links.size(); i++) {
             System.out.println(Integer.toString(i) + " " + symbols.get(i) + " " + names.get(i) + " " + links.get(i));

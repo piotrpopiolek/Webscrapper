@@ -11,6 +11,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import pl.pt.put.poznan.currencies.Coinmarketcap;
 
 public class Crawler {
 
@@ -19,13 +20,16 @@ public class Crawler {
         File dir = new File("src/main/java/" + packageName.replace(".", "/"));
         File[] listOfClasses = dir.listFiles();
 
+        WebDriver driver = new JBrowserDriver(Settings.builder().userAgent(UserAgent.CHROME).build());
+        new Coinmarketcap(driver);
+        driver.quit();
+        
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(listOfClasses.length - 1);
-
         int initialDelay = 0;
         for (File e : listOfClasses) {
             String name = e.getName();
             if (!name.equalsIgnoreCase(Crawler.class.getSimpleName().concat(".java"))) {
-                executor.scheduleAtFixedRate(runConst(packageName + "." + name.replace(".java", "")), initialDelay, 60, TimeUnit.SECONDS);
+                executor.scheduleAtFixedRate(runNewThread(packageName + "." + name.replace(".java", "")), initialDelay, 60, TimeUnit.SECONDS);
                 initialDelay = initialDelay + 10;
             }
         }
@@ -36,10 +40,11 @@ public class Crawler {
         
         executor.shutdown();
         executor.awaitTermination(5, TimeUnit.MINUTES);
+        
         System.exit(0);
     }
 
-    private static Runnable runConst(String className) {
+    private static Runnable runNewThread(String className) {
         Runnable r = () -> {
             System.out.println("\n" + Thread.currentThread().getName() + "\n");
             WebDriver driver = new JBrowserDriver(Settings.builder().userAgent(UserAgent.CHROME).build());
