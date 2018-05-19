@@ -21,8 +21,8 @@ public class Coinmarketcap {
         
         driver.get("https://coinmarketcap.com/all/views/all/");
 
-        elementsSymbol = driver.findElements(By.className("text-left col-symbol"));
-        elementsName = driver.findElements(By.className("no-wrap currency-name"));
+        elementsSymbol = driver.findElements(By.xpath("//td[contains(@class,'col-symbol')]"));
+        elementsName = driver.findElements(By.xpath("//td[contains(@class,'currency-name')]"));
         elementsLogo = driver.findElements(By.xpath("//div[contains(@class,'logo-sprite')]"));
         elementsMarketCap = driver.findElements(By.xpath("//td[contains(@class,'market-cap')]"));
 
