@@ -16,7 +16,7 @@ public class Kucoin {
         System.out.println(driver.getTitle());
 
         WebDriverWait wait = new WebDriverWait(driver, 30);
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.className("ant-table-row  ant-table-row-level-0"))));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("ant-table-row  ant-table-row-level-0")));
         List<WebElement> rows = driver.findElements(By.className("ant-table-row  ant-table-row-level-0"));
 
         if (rows.size() > 0) {

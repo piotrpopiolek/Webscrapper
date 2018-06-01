@@ -52,17 +52,15 @@ public class Coinmarketcap {
         
         if (!elementsMarketCap.isEmpty()) {
             elementsMarketCap.stream().forEach((e) -> {
-                System.out.println(e);
-                marketCap.add(Long.parseLong(e.getText().replaceAll(" ", "").replace("$", "").replace("?", "0")));
+                marketCap.add(Long.parseLong(e.getText().replaceAll(" ", "").replace("$", "").replace("?", "0").replace(",", "")));
             });
         } else {
             throw new Exception("MarketCaps not found!");
         }
 
         for (int i = 0; i < links.size(); i++) {
-            System.out.println(Integer.toString(i) + " " + symbols.get(i) + " " + names.get(i) + " " + links.get(i));
             CurrencyManagement management = CurrencyManagement.getInstance();
-            management.addCurrency(symbols.get(i), names.get(i), links.get(i));
+            management.addCurrency(symbols.get(i), names.get(i), links.get(i), marketCap.get(i));
         }
     }
 }

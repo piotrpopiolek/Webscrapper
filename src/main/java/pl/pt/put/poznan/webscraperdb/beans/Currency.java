@@ -9,7 +9,7 @@ public class Currency {
     private String symbol;
     private String name;
     private byte[] logo;
-    private double marketCap;
+    private long marketCap;
     private Set<CurrencyValue> currencyValues;
 
     @Column
@@ -41,11 +41,11 @@ public class Currency {
     }
 
     @Column
-    private double getMarketCap() {
+    public long getMarketCap() {
         return marketCap;
     }
 
-    private void setMarketCap(double marketCap) {
+    public void setMarketCap(long marketCap) {
         this.marketCap = marketCap;
     }
 

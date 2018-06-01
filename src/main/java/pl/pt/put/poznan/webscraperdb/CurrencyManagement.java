@@ -37,11 +37,12 @@ public class CurrencyManagement {
         addEntity(currency);
     }
 
-    public void addCurrency(String symbol, String name, String urlToLogo) {
+    public void addCurrency(String symbol, String name, String urlToLogo, long marketCap) {
         Currency currency = new Currency();
         currency.setSymbol(symbol);
         currency.setName(name);
         currency.setLogo(ImageConventer.imageToBytes(urlToLogo));
+        currency.setMarketCap(marketCap);
         addEntity(currency);
     }
 
@@ -110,4 +111,5 @@ public class CurrencyManagement {
         commitTransaction();
         return entities;
     }
+
 }
